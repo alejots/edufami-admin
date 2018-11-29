@@ -1,64 +1,107 @@
 <template>
-  <v-toolbar
+  <VToolbar
     color="primary"
     fixed
     dark
     app
+  >
+    <VToolbarTitle class="ml-0 pl-3">
+      <VToolbarSideIcon @click.stop="handleDrawerToggle" />
+    </VToolbarTitle>
+    <VTextField
+      flat
+      solo-inverted
+      prepend-icon="search"
+      label="Search"
+      class="hidden-sm-and-down"
+    />
+    <VSpacer />
+    <VBtn href="mailto:wangqiangshen@gmail.com">
+      Hire Me
+    </VBtn>      
+    <VBtn
+      icon
+      href="https://github.com/tookit/vue-material-admin"
     >
-    <v-toolbar-title class="ml-0 pl-3">
-      <v-toolbar-side-icon @click.stop="handleDrawerToggle"></v-toolbar-side-icon>
-    </v-toolbar-title>
-      <v-text-field
+      <VIcon>fa fa-github</VIcon>
+    </VBtn>
+    <VBtn
+      icon
+      @click="handleFullScreen()"
+    >
+      <VIcon>fullscreen</VIcon>
+    </VBtn>
+    <VMenu
+      offset-y
+      origin="center center"
+      class="elelvation-1"
+      :nudge-bottom="14"
+      transition="scale-transition"
+    >
+      <VBtn
+        icon
         flat
-        solo-inverted
-        prepend-icon="search"
-        label="Search"
-        class="hidden-sm-and-down"
+        slot="activator"
+      >
+        <VBadge
+          color="red"
+          overlap
         >
-      </v-text-field>
-      <v-spacer></v-spacer>
-      <v-btn href="mailto:wangqiangshen@gmail.com">
-        Hire Me
-      </v-btn>      
-      <v-btn icon href="https://github.com/tookit/vue-material-admin">
-        <v-icon>fa fa-github</v-icon>
-      </v-btn>
-      <v-btn icon @click="handleFullScreen()">
-        <v-icon>fullscreen</v-icon>
-      </v-btn>
-      <v-menu offset-y origin="center center" class="elelvation-1" :nudge-bottom="14" transition="scale-transition">
-        <v-btn icon flat slot="activator">
-        <v-badge color="red" overlap>
-          <span slot="badge">3</span>
-          <v-icon medium>notifications</v-icon>
-        </v-badge>
-        </v-btn>
-        <notification-list></notification-list>
-      </v-menu>
-      <v-menu offset-y origin="center center" :nudge-bottom="10" transition="scale-transition">
-        <v-btn icon large flat slot="activator">
-          <v-avatar size="30px">
-            <img src="/static/avatar/man_4.jpg" alt="Michael Wang"/>
-          </v-avatar>
-        </v-btn>
-        <v-list class="pa-0">
-          <v-list-tile v-for="(item,index) in items" :to="!item.href ? { name: item.name } : null" :href="item.href" @click="item.click" ripple="ripple" :disabled="item.disabled" :target="item.target" rel="noopener" :key="index">
-            <v-list-tile-action v-if="item.icon">
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </v-list>
-      </v-menu>
-  </v-toolbar>
+          <span slot="badge">
+            3
+          </span>
+          <VIcon medium>
+            notifications
+          </VIcon>
+        </VBadge>
+      </VBtn>
+      <NotificationList />
+    </VMenu>
+    <VMenu
+      offset-y
+      origin="center center"
+      :nudge-bottom="10"
+      transition="scale-transition"
+    >
+      <VBtn
+        icon
+        large
+        flat
+        slot="activator"
+      >
+        <VAvatar size="30px">
+          <img
+            src="/static/avatar/man_4.jpg"
+            alt="Michael Wang"
+          >
+        </VAvatar>
+      </VBtn>
+      <VList class="pa-0">
+        <VListTile
+          v-for="(item,index) in items"
+          :to="!item.href ? { name: item.name } : null"
+          :href="item.href"
+          @click="item.click"
+          ripple="ripple"
+          :disabled="item.disabled"
+:target="item.target" rel="noopener" :key="index"
+        >
+          <VListTileAction v-if="item.icon">
+            <VIcon>{{ item.icon }}</VIcon>
+          </VListTileAction>
+          <VListTileContent>
+            <VListTileTitle>{{ item.title }}</VListTileTitle>
+          </VListTileContent>
+        </VListTile>
+      </VList>
+    </VMenu>
+  </VToolbar>
 </template>
 <script>
 import NotificationList from '@/components/widgets/list/NotificationList';
 import Util from '@/util';
 export default {
-  name: 'app-toolbar',
+  name: 'AppToolbar',
   components: {
     NotificationList
   },
@@ -85,6 +128,7 @@ export default {
         href: '#',
         title: 'Logout',
         click: (e) => {
+          console.log(e)
           window.getApp.$emit('APP_LOGOUT');
         }
       }

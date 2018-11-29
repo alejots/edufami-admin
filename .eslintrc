@@ -1,11 +1,10 @@
-
 {
-	"extends": "vue",
-	"env": {
-	    "browser": true,
-	    "node": true
-	},
-	"parserOptions": {
-        "ecmaVersion": 2017
+    "extends": [
+        "eslint:recommended", 
+        "plugin:vue/base"
+    ],
+    rules:
+    {
+        'no-console': 'off',
     }
 }

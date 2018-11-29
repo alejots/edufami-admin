@@ -1,30 +1,30 @@
-const Menu =  [
+const Menu = [
   { header: 'Apps' },
   {
     title: 'Dashboard',
     group: 'apps',
     icon: 'dashboard',
-    name: 'Dashboard',
+    name: 'Dashboard'
   },
   {
     title: 'Chat',
     group: 'apps',
     icon: 'chat_bubble',
     target: '_blank',
-    name: 'Chat',
+    name: 'Chat'
   },
   {
     title: 'Inbox',
     group: 'apps',
     name: 'Mail',
     target: '_blank',
-    icon: 'email',
+    icon: 'email'
   },
   {
     title: 'Media',
     group: 'apps',
     name: 'Media',
-    icon: 'perm_media',
+    icon: 'perm_media'
   },
   {
     title: 'Widgets',
@@ -35,10 +35,10 @@ const Menu =  [
       { name: 'social', title: 'Social', component: 'components/social' },
       { name: 'statistic', title: 'Statistic', badge: 'new', component: 'components/statistic' },
       { name: 'chart', title: 'Chart', component: 'components/chart' },
-      { name: 'list', title: 'List', component: 'components/widget-list' },
+      { name: 'list', title: 'List', component: 'components/widget-list' }
       // { name: 'post', title: 'Post', component: 'components/widget-post' },
     ]
-  },  
+  },
   { header: 'UI Elements' },
   {
     title: 'General',
@@ -58,12 +58,12 @@ const Menu =  [
       { name: 'tables', title: 'Data Tables', component: 'components/tables' },
       { name: 'parallax', title: 'Parallax  image', component: 'components/parallax' },
       { name: 'snackbar', title: 'Snackbar', component: 'components/snackbar' },
-      { name: 'progress', title: 'Progress', component: 'components/progress' },      
-      { name: 'slider', title: 'Slider', component: 'components/sliders' },      
-      { name: 'tooltip', title: 'Tooltip', component: 'components/tooltips' },      
-      { name: 'pagination', title: 'Pagination', component: 'components/paginations' },      
-      { name: 'typography', title: 'Typography', component: 'components/typography' },      
-      { name: 'color', title: 'Color', component: 'components/color' },      
+      { name: 'progress', title: 'Progress', component: 'components/progress' },
+      { name: 'slider', title: 'Slider', component: 'components/sliders' },
+      { name: 'tooltip', title: 'Tooltip', component: 'components/tooltips' },
+      { name: 'pagination', title: 'Pagination', component: 'components/paginations' },
+      { name: 'typography', title: 'Typography', component: 'components/typography' },
+      { name: 'color', title: 'Color', component: 'components/color' }
 
     ]
   },
@@ -73,8 +73,8 @@ const Menu =  [
     component: 'picker',
     icon: 'filter_vintage',
     items: [
-      { name: 'timepicker', title: 'Timepicker', component: 'pickers/timepicker' },     
-      { name: 'datepicker', title: 'Datepicker', component: 'pickers/datepicker' },      
+      { name: 'timepicker', title: 'Timepicker', component: 'pickers/timepicker' },
+      { name: 'datepicker', title: 'Datepicker', component: 'pickers/datepicker' }
 
     ]
   },
@@ -93,9 +93,9 @@ const Menu =  [
       // { name: 'navigation-drawers', title: 'Navigation drawers', component: 'components/navigation-drawers' },
       { name: 'tabs', title: 'Tabs', component: 'components/tabs' },
       { name: 'toolbar', title: 'Toolbars', component: 'components/toolbar' },
-      { name: 'timeline', title: 'Timeline', component: 'components/timeline' },
+      { name: 'timeline', title: 'Timeline', component: 'components/timeline' }
     ]
-  },  
+  },
   {
     title: 'Forms & Controls',
     group: 'forms',
@@ -107,7 +107,7 @@ const Menu =  [
       { name: 'selection-controls', title: 'Selection Controls', component: 'components/selection-controls' },
       { name: 'text-fields', title: 'Text Fields', component: 'components/text-fields' },
       { name: 'steppers', title: 'Steppers', component: 'components/steppers' },
-      { name: 'editors', title: 'Editors', component: 'components/editors' },
+      { name: 'editors', title: 'Editors', component: 'components/editors' }
     ]
   },
   { divider: true },
@@ -120,19 +120,19 @@ const Menu =  [
       { name: 'Login', title: 'Login', component: 'Login' },
       { name: '404', title: '404', component: 'NotFound' },
       { name: '403', title: '403', component: 'AccessDenied' },
-      { name: '500', title: '500', component: 'ServerError' },
+      { name: '500', title: '500', component: 'ServerError' }
     ]
-  },
-];
+  }
+]
 // reorder menu
 Menu.forEach((item) => {
   if (item.items) {
     item.items.sort((x, y) => {
-      let textA = x.title.toUpperCase();
-      let textB = y.title.toUpperCase();
-      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-    });
+      const textA = x.title.toUpperCase()
+      const textB = y.title.toUpperCase()
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0
+    })
   }
-});
+})
 
-export default Menu;
+export default Menu
