@@ -77,16 +77,20 @@ const actions = {
       })
     })
   },
-  USERACCOUNTS_LOGOUT: ({ commit }) => {
-    return new Promise((resolve) => {
-      localStorage.removeItem('user-token')
-      commit('userAccountReset')
-      commit('SelfAssessmentReset')
-      commit('businessReset')
-      commit('indicatorReset')
-      commit('invitationsReset')
-      commit('pillarsReset')
-      resolve()
+  USERACCOUNTS_LOGOUT: ({ commit, getters }) => {
+    return new Promise((resolve, reject) => {
+      if(getters.isAuthenticated) {
+        api.apiCall({ url: 'UserAccounts/logout', method: 'POST'})
+      .then(() => {
+        localStorage.removeItem('user-token')
+        commit('userAccountReset')
+        resolve()
+      }).catch(err => {
+        localStorage.removeItem('user-token')
+        commit('userAccountReset')
+        reject(err)
+      })
+      }
     })
   }
 }

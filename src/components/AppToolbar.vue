@@ -16,13 +16,10 @@
       class="hidden-sm-and-down"
     />
     <VSpacer />
-    <VBtn href="mailto:wangqiangshen@gmail.com">
-      Hire Me
+    <VBtn href="mailto:alejandro.tunaroza@gmail.com">
+      Contact the Developer
     </VBtn>      
-    <VBtn
-      icon
-      href="https://github.com/tookit/vue-material-admin"
-    >
+    <VBtn icon href="https://github.com/WFPColombia">
       <VIcon>fa fa-github</VIcon>
     </VBtn>
     <VBtn
@@ -47,12 +44,8 @@
           color="red"
           overlap
         >
-          <span slot="badge">
-            3
-          </span>
-          <VIcon medium>
-            notifications
-          </VIcon>
+          <span slot="badge">3</span>
+          <VIcon medium>notifications</VIcon>
         </VBadge>
       </VBtn>
       <NotificationList />
@@ -70,10 +63,7 @@
         slot="activator"
       >
         <VAvatar size="30px">
-          <img
-            src="/static/avatar/man_4.jpg"
-            alt="Michael Wang"
-          >
+          <VIcon>person</VIcon>
         </VAvatar>
       </VBtn>
       <VList class="pa-0">

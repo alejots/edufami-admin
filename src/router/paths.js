@@ -2,8 +2,7 @@ import NotFound from '@/pages/NotFound.vue'
 import Dashboard from '@/pages/Dashboard.vue'
 import Login from '@/pages/Login.vue'
 
-export default [
-
+const paths = [
   {
     path: '*',
     meta: {
@@ -46,7 +45,7 @@ export default [
   //   )
   // },
   {
-    path: '/login',
+    path: '/',
     meta: {
       public: true
     },
@@ -54,18 +53,11 @@ export default [
     component: Login
   },
   {
-    path: '/',
-    meta: { },
-    name: 'Root',
-    redirect: {
-      name: 'Dashboard'
-    }
-  },
-  {
     path: '/dashboard',
     meta: { breadcrumb: true },
     name: 'Dashboard',
-    component: Dashboard
+    component: Dashboard,
+
   }
 
   // {
@@ -587,3 +579,5 @@ export default [
   //   )
   // },
 ]
+
+export default paths

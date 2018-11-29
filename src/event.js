@@ -1,4 +1,14 @@
 export default [
+ {
+    name: 'SHOW_SNACKBAR',
+    callback: function (text, color) {
+     this.snackbar = {
+        show: true,
+        color,
+        text
+      }
+    }
+  },
   {
     name: 'APP_LOGIN_SUCCESS',
     callback: function (e) {
@@ -15,7 +25,7 @@ export default [
         color: 'green',
         text: 'Logout successfully.'
       }
-      this.$router.replace({ path: '/login' })
+      this.$router.replace({ path: '/' })
     }
   },
   {

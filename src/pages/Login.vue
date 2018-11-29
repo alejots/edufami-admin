@@ -11,23 +11,13 @@
                   <h1 class="flex my-4 primary--text">Edufami</h1>
                 </div>                
                 <v-form>
-                  <v-text-field append-icon="mail" name="username" label="Username" type="text" v-model="model.username"></v-text-field>
+                  <v-text-field append-icon="person" name="username" label="Username" type="text" v-model="model.username"></v-text-field>
                   <v-text-field append-icon="lock" name="password" label="Password" id="password" type="password" v-model="model.password"></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-btn block color="primary" @click="login" :loading="loading">Login</v-btn>
               </v-card-actions>
-               <v-card-text>
-                 <v-alert
-                    :value="infoError"
-                    color="error"
-                    icon="warning"
-                    outline
-                  >
-                   {{this.error}}
-                  </v-alert>
-               </v-card-text>
             </v-card>
           </v-flex>
         </v-layout>
@@ -44,27 +34,23 @@ export default {
       username: '',
       password: ''
     },
-    infoError: false,
-    error: ''
   }),
-
+  mounted () {
+    this.$store.dispatch('USERACCOUNTS_LOGOUT')
+  },
   methods: {
     login () {
       this.loading = true
-      this.loading = true
-      this.infoError = false
       var user = {
         username: this.model.username,
         password: this.model.password
       }
-      console.log(user)
       this.$store.dispatch('AUTH_REQUEST', user).then(() => {
         this.loading = false
         this.$router.push('/dashboard')
       }).catch((err) => {
         this.loading = false
-        this.infoError = true // TODO aplicar con estilos
-        this.error = err.response.data.error.message
+        window.getApp.$emit('SHOW_SNACKBAR', err.response.data.error.message, 'red' );
       })
     }
   }
