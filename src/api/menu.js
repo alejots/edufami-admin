@@ -9,7 +9,7 @@ const Menu = [
     title: 'Trainings',
     group: 'trainings',
     icon: 'book',
-    name: 'Chat'
+    name: 'Trainings'
   },
   // {
   //   title: 'Inbox',

@@ -1,6 +1,7 @@
 import NotFound from '@/pages/NotFound.vue'
-import Dashboard from '@/pages/Dashboard.vue'
 import Login from '@/pages/Login.vue'
+import Dashboard from '@/pages/Dashboard.vue'
+import Trainings from '@/pages/Trainings.vue'
 
 const paths = [
   {
@@ -58,18 +59,13 @@ const paths = [
     name: 'Dashboard',
     component: Dashboard,
 
-  }
-
-  // {
-  //   path: '/calendar',
-  //   meta: { breadcrumb: true },
-  //   name: 'Calendar',
-  //   component: (a) => import(
-  //     /* webpackChunkName: "routes" */
-  //     /* webpackMode: "lazy-once" */
-  //     `@/pages/Calendar.vue`
-  //   )
-  // },
+  },
+  {
+    path: '/trainings',
+    meta: { breadcrumb: true },
+    name: 'Trainings',
+    component: Trainings
+  },
   // {
   //   path: '/media',
   //   meta: { },

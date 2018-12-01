@@ -11,7 +11,7 @@
             <router-view></router-view>
           </div>   
            <!-- App Footer -->
-          <v-footer height="auto" class="white pa-3 app--footer">
+          <v-footer height="auto" class="white pa-3 app--footer" fixed>
             <span class="caption">WFP &copy; {{ new Date().getFullYear() }}</span>
             <v-spacer></v-spacer>
             <span class="caption mr-1"> Developed by Alejandro Tunaroza </span> <v-icon color="blue" small>star</v-icon>

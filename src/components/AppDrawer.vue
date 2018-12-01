@@ -8,10 +8,10 @@
     v-model="drawer"
     width="260"
     >
-    <v-toolbar color="primary darken-1" dark>
-      <img v-bind:src="computeLogo" height="36" alt="Edufami Admin">
+    <v-toolbar color="primary" dark>
+      <img v-bind:src="computeLogo" height="40" alt="Edufami Admin">
       <v-toolbar-title class="ml-0 pl-3">
-        <span class="hidden-sm-and-down">Edufami Admin</span>
+        <!--<span class="hidden-sm-and-down">DB</span>-->
       </v-toolbar-title>        
     </v-toolbar>
     <vue-perfect-scrollbar class="drawer-menu--scroll" :settings="scrollSettings">
@@ -98,7 +98,7 @@ export default {
       return true;
     },
     computeLogo () {
-      return '/static/m.png';
+      return '/static/logos/edufami-logotipo.svg';
     },
 
     sideToolbarColor () {

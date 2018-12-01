@@ -82,12 +82,14 @@ const actions = {
       if(getters.isAuthenticated) {
         api.apiCall({ url: 'UserAccounts/logout', method: 'POST'})
       .then(() => {
-        localStorage.removeItem('user-token')
+        localStorage.removeItem('user-token') // TODO Optimizar esto con una mutation o algo parecido
         commit('userAccountReset')
+        commit('trainingReset')
         resolve()
       }).catch(err => {
         localStorage.removeItem('user-token')
         commit('userAccountReset')
+        commit('trainingReset')
         reject(err)
       })
       }

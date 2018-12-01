@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-toolbar card dense color="transparent">
-      <v-toolbar-title><h4>Project</h4></v-toolbar-title>
+      <v-toolbar-title><h4>Trainings Available </h4></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>more_vert</v-icon>
@@ -12,19 +12,23 @@
       <template>
         <v-data-table
           :headers="headers"
-          :items="projects"
+          :items="getTrainings"
           hide-actions
           class="elevation-0"
         >
           <template slot="items" slot-scope="props">
+            <td>{{props.item.id}}</td>
             <td>
               <v-avatar size="36px">
                 <img :src="props.item.avatar" :alt="props.item.username" />
               </v-avatar>
             </td>
-            <td>{{ props.item.name }}</td>
-            <td class="text-xs-left">{{ props.item.deadline }}</td>
+            <td class="text-xs-left">{{ props.item.name }}</td>
+            <td class="text-xs-left">{{ props.item.description }}</td>
+            <td class="text-xs-left"><v-chip label small :color="getColorByStatus('edufami')" text-color="white" >Edufami</v-chip> <v-chip label small :color="getColorByStatus('nutrifami')" text-color="white" >Nutrifami</v-chip></td>
+            <td class="text-xs-left">{{ props.item.status }}</td>
             <td class="text-xs-left"><v-progress-linear :value="props.item.progress" height="5" :color="props.item.color"></v-progress-linear> </td>
+            <td class="text-xs-left">{{ props.item.languageId }}</td>
             <td class="text-xs-right">
               <v-btn flat icon color="grey">
                 <v-icon>edit</v-icon>
@@ -42,32 +46,56 @@
 </template>
 
 <script>
-import { Projects } from '@/api/project';
+import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
       headers: [
         {
-          text: '',
-          align: 'center',
+          text: '#',
+          align: 'left',
           sortable: false,
-          value: 'avatar'
+          value: 'id'
+        },
+        {
+          text: 'Image',
+          align: 'left',
+          sortable: false,
+          value: 'image'
         },
         {
           text: 'Name',
           align: 'left',
           value: 'name'
         },
-        { text: 'Deadline', value: 'deadline' },
-        { text: 'Progress', value: 'progress' },
+        { text: 'Description', value: 'description' },
+        {
+          text: 'Apps',
+          align: 'left',
+          value: 'apps'
+        },
+        { text: 'Status', value: 'statusId' },
+        { text: 'Progress', value: 'progress'},
+       { text: 'Language', value: 'languageId' },
         { text: 'Action', value: 'action', align: 'right' },
 
       ],
+      colors: {
+        edufami: '#ff9800',
+        nutrifami: '#00c97e',
+        equifami: 'green',
+        climafami: ''
+      }
     };
   },
   computed: {
-    projects () {
-      return Projects;
+    ...mapGetters([
+      'getTrainings'
+    ])
+  },
+  methods: {
+    getColorByStatus (app) {
+      return this.colors[app];
     }
   }
 };

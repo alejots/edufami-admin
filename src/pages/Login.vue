@@ -7,7 +7,7 @@
             <v-card class="elevation-1 pa-3">
               <v-card-text>
                 <div class="layout column align-center">
-                  <img src="/static/m.png" alt="Edufami Logo" width="120" height="120"> <!-- TODO Actualizar por el logo actual -->
+                  <img src="/static/logos/edufami-logosimbolo.svg" alt="Edufami" height="120"> <!-- TODO Actualizar por el logo actual -->
                   <h1 class="flex my-4 primary--text">Edufami</h1>
                 </div>                
                 <v-form>
