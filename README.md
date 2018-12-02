@@ -1,15 +1,8 @@
-# Vue Material Admin
+# Edufami - Admin 
 
 ### Introduction
-Vue Material Admin Template is a [Vue](https://vuejs.org/index.html/) Based Material Design Admin Template.
-And use [Vuetifyjs](https://vuetifyjs.com/) as base framework.
-Vuetify is Awesome.
-
-### Demo
-[http://vma.isocked.com/#/dashboard](http://vma.isocked.com/#/dashboard) 
-
-### Preview
-![Preivew](http://vma.isocked.com//static/preview/01_preview.png)
+'Edufami - Admin' is the administrator app for all the apps of [Edufami](http://edufami.org).
+Edufami is created by WFP - Colombia.
 
 ###
 ### Project Structure
@@ -73,6 +66,10 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 * [ECharts](http://echarts.baidu.com/option.html)
 * [Stylus](http://stylus-lang.com/)
 
+### Adknwoledge
+
+* To [vue-material-admin](https://github.com/tookit/vue-material-admin)
+
 ## License
 
-[MIT](https://github.com/tookit/vue-material-admin/blob/master/LICENSE)
+[MIT](https://github.com/WFPColombia/edufami-admin/blob/master/LICENSE)
