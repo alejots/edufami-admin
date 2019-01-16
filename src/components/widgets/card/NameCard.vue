@@ -26,17 +26,17 @@
   </v-card>
   <v-bottom-nav :value="true" color="transparent" :height="64" v-if="showBottomNav">
     <v-btn flat color="teal" value="recent">
-      <span>Recent</span>
-      <v-icon>history</v-icon>
+      <span>Edit</span>
+      <v-icon>edit</v-icon>
     </v-btn>
     <v-btn flat color="teal" value="favorites">
-      <span>Favorites</span>
-      <v-icon>favorite</v-icon>
+      <span>Delete</span>
+      <v-icon>delete</v-icon>
     </v-btn>
-    <v-btn flat color="teal" value="nearby">
+    <!--<v-btn flat color="teal" value="nearby">
       <span>Nearby</span>
       <v-icon>place</v-icon>
-    </v-btn>
+    </v-btn>-->
   </v-bottom-nav>   
 </div>
 </template>

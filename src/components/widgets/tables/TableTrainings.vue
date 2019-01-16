@@ -30,7 +30,7 @@
             <td class="text-xs-left"><v-progress-linear :value="props.item.progress" height="5" :color="props.item.color"></v-progress-linear> </td>
             <td class="text-xs-left">{{ props.item.languageId }}</td>
             <td class="text-xs-right">
-              <v-btn flat icon color="grey">
+              <v-btn flat icon color="grey" href="#/trainings/1">
                 <v-icon>edit</v-icon>
               </v-btn>
               <v-btn flat icon color="grey">
