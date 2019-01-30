@@ -47,7 +47,7 @@
 import AppDrawer from '@/components/AppDrawer';
 import AppToolbar from '@/components/AppToolbar';
 import AppFab from '@/components/AppFab';
-import PageHeader from '@/components/PageHeader';
+import PageHeader from '@/components/template/PageHeader';
 // import menu from '@/api/menu';
 import AppEvents from  './event';
 export default {

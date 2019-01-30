@@ -3,7 +3,7 @@
     <v-container grid-list-xl fluid>
       <v-layout row wrap>
         <v-flex sm12>
-            <h3>Training: Nutrifami para todos</h3>
+            <h3>Unit: Alimentación Saludable</h3>
         </v-flex>
         <v-flex sm12>
           <v-widget title="Basic Usage">
@@ -11,12 +11,12 @@
               <v-container>
                 <v-layout row>
                   <v-flex xs4>
-                    <v-subheader>Training name</v-subheader>
+                    <v-subheader>Unit name</v-subheader>
                   </v-flex>
                   <v-flex xs8>
                     <v-text-field
-                      label="Training name help text"
-                      value="Nutrifami para todos"
+                      label="Add the Unit's name"
+                      value="Alimentación Saludable"
                       :rules="[rules.required]"
                     ></v-text-field>
                   </v-flex>
@@ -34,7 +34,7 @@
                     ></v-text-field>
                   </v-flex>
                 </v-layout>
-                <v-layout row>
+                <!--<v-layout row>
                   <v-flex xs4>
                     <v-subheader>Long Description</v-subheader>
                   </v-flex>
@@ -45,10 +45,10 @@
                       value=""
                     ></v-text-field>
                   </v-flex>
-                </v-layout>
+                </v-layout>-->
                 <v-layout row>
                   <v-flex xs4>
-                    <v-subheader>General Learning Objective</v-subheader>
+                    <v-subheader>Learning Objective</v-subheader>
                   </v-flex>
                   <v-flex xs8>
                     <v-text-field
@@ -58,36 +58,12 @@
                     ></v-text-field>
                   </v-flex>
                 </v-layout>
-                <v-layout row>
-                  <v-flex xs4>
-                    <v-subheader>Reach of Learning</v-subheader>
-                  </v-flex>
-                  <v-flex xs8>
-                    <v-text-field
-                      name="reach"
-                      label="Reach of learning"
-                      value=""
-                    ></v-text-field>
-                  </v-flex>
-                </v-layout>
-                <v-layout row>
-                  <v-flex xs4>
-                    <v-subheader>Language </v-subheader>
-                  </v-flex>
-                  <v-flex xs8>
-                    <v-text-field
-                      name="language"
-                      label="Language of the training"
-                      value="Español"
-                    ></v-text-field>
-                  </v-flex>
-                </v-layout>
               </v-container>
             </div>
           </v-widget>
         </v-flex>
         <v-flex sm12>
-            <h5>Units</h5>
+            <h5>Lessons</h5>
         </v-flex>
         <v-flex lg3 sm12 v-for="(item,index) in users" :key=" 'bottom-nav' + index">
           <unit-card
@@ -122,8 +98,8 @@ export default {
     },
     users: [
         {
-          jobTitle: '4 Lessons',
-          name: 'Alimentación Saludable',
+          jobTitle: '5 Lessons',
+          name: 'La alimentación',
           cardBgImage: '/static/bg/1.jpg',
           dark: true,
           /*avatar: {
@@ -133,7 +109,7 @@ export default {
         },
         {
           jobTitle: '5 Lessons',
-          name: 'Combinaciones Saludables',
+          name: 'Los Alimentos',
           dark: true,
           cardBgImage: '/static/bg/16.jpg',
           /* avatar: {
@@ -143,7 +119,7 @@ export default {
         },
         {
           jobTitle: '5 Lessons',
-          name: 'Mujeres embarazadas',
+          name: 'El plato saludable',
           dark: true,
           cardBgImage: '/static/bg/4.jpg',
           /* avatar: {
@@ -153,24 +129,14 @@ export default {
         },
         {
           jobTitle: '5 Lessons',
-          name: 'Manejo Adecuado de los Alimentos',
+          name: 'Los colores de los alimentos',
           dark: true,
           cardBgImage: '/static/bg/14.jpg',
           /* avatar: {
             src: 'https://randomuser.me/api/portraits/lego/4.jpg',
             size: '36'
           }, */ 
-        },
-        {
-          jobTitle: '5 Lessons',
-          name: 'Habitos Saludables',
-          dark: true,
-          cardBgImage: '/static/bg/15.jpg',
-          /* avatar: {
-            src: 'https://randomuser.me/api/portraits/lego/5.jpg',
-            size: '36'
-          }, */ 
-        }        
+        }     
       ]
   }),
   computed: {},

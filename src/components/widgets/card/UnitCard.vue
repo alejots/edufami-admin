@@ -25,7 +25,7 @@
     </v-card-text>
   </v-card>
   <v-bottom-nav :value="true" color="transparent" :height="64" v-if="showBottomNav">
-    <v-btn flat color="teal" value="recent">
+    <v-btn flat color="teal" value="recent" href="#/trainings/1/1">
       <span>Edit</span>
       <v-icon>edit</v-icon>
     </v-btn>

@@ -3,6 +3,10 @@ import Login from '@/pages/Login.vue'
 import Dashboard from '@/pages/Dashboard.vue'
 import Trainings from '@/pages/Trainings.vue'
 import TrainingsTraining from '@/pages/TrainingsTraining.vue'
+import TrainingsUnit from '@/pages/TrainingsUnit.vue'
+import TrainingsLesson from '@/pages/TrainingsLesson.vue'
+import TrainingsStep from '@/pages/TrainingsStep.vue'
+
 
 const paths = [
   {
@@ -72,6 +76,24 @@ const paths = [
     meta: { breadcrumb: true },
     name: 'TrainingsTraining',
     component: TrainingsTraining
+  },
+  {
+    path: '/trainings/:triningId/:unitId',
+    meta: { breadcrumb: true },
+    name: 'TrainingsUnit',
+    component: TrainingsUnit
+  },
+  {
+    path: '/trainings/:triningId/:unitId/:lessonId',
+    meta: { breadcrumb: true },
+    name: 'TrainingsLesson',
+    component: TrainingsLesson
+  },
+  {
+    path: '/trainings/:triningId/:unitId/:lessonId/:stepId',
+    meta: { breadcrumb: true },
+    name: 'TrainingsStep',
+    component: TrainingsStep
   },
   // {
   //   path: '/media',

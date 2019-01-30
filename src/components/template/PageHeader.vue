@@ -12,11 +12,11 @@
       </v-breadcrumbs-item>
     </v-breadcrumbs>
     <v-spacer></v-spacer>
-    <!--<div class="page-header-right">
+    <div class="page-header-right">
       <v-btn icon>
         <v-icon class="text--secondary">refresh</v-icon>
       </v-btn>
-    </div>-->
+    </div>
   </v-layout>  
 </template>
 
