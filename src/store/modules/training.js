@@ -2,6 +2,20 @@ import * as api from '@/api/api'
 
 function initialState () {
   return {
+    training: {
+      "name": "string",
+      "nameAudio": "string",
+      "description": "string",
+      "descriptionAudio": "string",
+      "descriptionLong": "string",
+      "descriptionLongAudio": "string",
+      "zipFileUrl": "string",
+      "active": true,
+      "statusId": 0,
+      "imageId": 0,
+      "languageId": "string",
+      "ownerId": 0
+    },
     trainings: [],
     status: {
       trainings: ''
@@ -22,6 +36,20 @@ const actions = {
       api.apiCall({ url: 'Trainings' }).then(resp => {
         commit('setTrainingStatus', { status: 'success', key: 'trainings' })
         commit('setTrainings', resp.data)
+        resolve(resp)
+      })
+        .catch(err => {
+          commit('setTrainingStatus', { status: 'error', key: 'trainings' })
+          reject(err)
+        })
+    })
+  },
+  TRAININGS_POST: ({ commit, dispatch }, data) => {
+    return new Promise((resolve, reject) => {
+      commit('setTrainingStatus', { status: 'pending', key: 'trainings' })
+      api.apiCall({ url: 'Trainings', method: 'POST', data: data }).then(resp => {
+        commit('setTrainingStatus', { status: 'success', key: 'trainings' })
+        dispatch('TRAININGS_GET')
         resolve(resp)
       })
         .catch(err => {
