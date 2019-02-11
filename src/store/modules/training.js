@@ -32,7 +32,7 @@ const getters = {
 const actions = {
   TRAININGS_GET: ({ commit }) => {
     return new Promise((resolve, reject) => {
-      commit('setTrainingStatus', { status: 'pending', key: 'trainings' })
+      commit('setTrainingStatus', { status: 'getting', key: 'trainings' })
       api.apiCall({ url: 'Trainings' }).then(resp => {
         commit('setTrainingStatus', { status: 'success', key: 'trainings' })
         commit('setTrainings', resp.data)
@@ -46,8 +46,23 @@ const actions = {
   },
   TRAININGS_POST: ({ commit, dispatch }, data) => {
     return new Promise((resolve, reject) => {
-      commit('setTrainingStatus', { status: 'pending', key: 'trainings' })
+      commit('setTrainingStatus', { status: 'posting', key: 'trainings' })
       api.apiCall({ url: 'Trainings', method: 'POST', data: data }).then(resp => {
+        commit('setTrainingStatus', { status: 'success', key: 'trainings' })
+        dispatch('TRAININGS_GET')
+        resolve(resp)
+      })
+        .catch(err => {
+          commit('setTrainingStatus', { status: 'error', key: 'trainings' })
+          reject(err)
+        })
+    })
+  },
+  TRAININGS_DELETE: ({ commit, dispatch }, id) => {
+    console.log('Trainings/' + id)
+    return new Promise((resolve, reject) => {
+      commit('setTrainingStatus', { status: 'deleting', key: 'trainings' })
+      api.apiCall({ url: 'Trainings/' + id, method: 'DELETE' }).then(resp => {
         commit('setTrainingStatus', { status: 'success', key: 'trainings' })
         dispatch('TRAININGS_GET')
         resolve(resp)

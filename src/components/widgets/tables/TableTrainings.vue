@@ -1,7 +1,8 @@
 <template>
   <v-card>
     <v-toolbar card dense color="transparent">
-      <v-toolbar-title><h4>Trainings Available </h4></v-toolbar-title>
+      <v-toolbar-title><h4>Trainings Available </h4>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>more_vert</v-icon>
@@ -10,12 +11,7 @@
     <v-divider></v-divider>
     <v-card-text class="pa-0">
       <template>
-        <v-data-table
-          :headers="headers"
-          :items="getTrainings"
-          hide-actions
-          class="elevation-0"
-        >
+        <v-data-table :headers="headers" :items="getTrainings" hide-actions class="elevation-0">
           <template slot="items" slot-scope="props">
             <td>{{props.item.id}}</td>
             <td>
@@ -25,15 +21,20 @@
             </td>
             <td class="text-xs-left">{{ props.item.name }}</td>
             <td class="text-xs-left">{{ props.item.description }}</td>
-            <td class="text-xs-left"><v-chip label small :color="getColorByStatus('edufami')" text-color="white" >Edufami</v-chip> <v-chip label small :color="getColorByStatus('nutrifami')" text-color="white" >Nutrifami</v-chip></td>
+            <td class="text-xs-left">
+              <v-chip label small :color="getColorByStatus('edufami')" text-color="white">Edufami</v-chip>
+              <v-chip label small :color="getColorByStatus('nutrifami')" text-color="white">Nutrifami</v-chip>
+            </td>
             <td class="text-xs-left">{{ props.item.status }}</td>
-            <td class="text-xs-left"><v-progress-linear :value="props.item.progress" height="5" :color="props.item.color"></v-progress-linear> </td>
+            <td class="text-xs-left">
+              <v-progress-linear :value="props.item.progress" height="5" :color="props.item.color"></v-progress-linear>
+            </td>
             <td class="text-xs-left">{{ props.item.languageId }}</td>
             <td class="text-xs-right">
-              <v-btn flat icon color="grey" href="#/trainings/1">
+              <v-btn flat icon color="grey" :href="'#/trainings/' + props.item.id">
                 <v-icon>edit</v-icon>
               </v-btn>
-              <v-btn flat icon color="grey">
+              <v-btn flat icon color="grey" @click="openModal(props.item)">
                 <v-icon>delete</v-icon>
               </v-btn>
             </td>
@@ -42,14 +43,29 @@
       </template>
       <v-divider></v-divider>
     </v-card-text>
+    <v-layout row justify-center>
+      <v-dialog v-model="dialog" persistent max-width="290">
+        <v-card>
+          <v-card-title class="headline">Alert</v-card-title>
+          <v-card-text>Are you sure you want to delete this training?</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="error" @click="deleteTraining()">Delete</v-btn>
+            <v-btn color="success" @click="closeModal()">No thanks</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-layout>
   </v-card>
 </template>
-
 <script>
 import { mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   data () {
     return {
+      dialog: false,
+      selectedTraining: {},
       headers: [
         {
           text: '#',
@@ -94,8 +110,32 @@ export default {
     ])
   },
   methods: {
+    ...mapActions([
+      'TRAININGS_DELETE'
+    ]),
     getColorByStatus (app) {
       return this.colors[app];
+    },
+    openModal (item) {
+      this.selectedTraining = item
+      this.dialog = true
+    },
+    deleteTraining () {
+      console.log(this.selectedTraining)
+      this.loading = true
+      this.TRAININGS_DELETE(this.selectedTraining.id).then(() => {
+          this.loading = false
+          window.getApp.$emit('SHOW_SNACKBAR', 'The training had been deleted with success!!', 'green' );
+          this.dialog = false
+        }).catch((err) => {
+          this.loading = true
+          window.getApp.$emit('SHOW_SNACKBAR', err.response.data.error.message, 'red' );
+        })
+      this.selectedTraining = {}
+    },
+    closeModal () {
+      this.selectedTraining = {}
+      this.dialog = false
     }
   }
 };

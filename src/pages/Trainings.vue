@@ -50,6 +50,8 @@
 
 <script>
 
+import { mapActions } from 'vuex'
+
 import TableTrainings from '@/components/widgets/tables/TableTrainings';
 export default {
   components: {
@@ -81,6 +83,10 @@ export default {
   }),
   computed: {},
   methods: {
+    ...mapActions([
+      'TRAININGS_GET',
+      'TRAININGS_POST'
+    ]),
     reset () {
       this.$refs.form.reset()
       this.dialog = false
@@ -88,7 +94,7 @@ export default {
     validate () {
       if (this.$refs.form.validate()) {
         this.loading = true
-        this.$store.dispatch('TRAININGS_POST', this.training).then(() => {
+        this.TRAININGS_POST(this.training).then(() => {
           this.loading = false
           window.getApp.$emit('SHOW_SNACKBAR', 'The training had been saved with success!!', 'green' );
           this.$refs.form.reset()
@@ -102,7 +108,7 @@ export default {
   },
   mounted () {
     this.loading = true
-    this.$store.dispatch('TRAININGS_GET').then(() => {
+    this.TRAININGS_GET().then(() => {
         this.loading = false
       }).catch((err) => {
         this.loading = true
