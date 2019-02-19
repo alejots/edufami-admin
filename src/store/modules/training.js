@@ -30,7 +30,7 @@ const getters = {
 }
 
 const actions = {
-  TRAININGS_GET: ({ commit }) => {
+  GET_TRAININGS: ({ commit }) => {
     return new Promise((resolve, reject) => {
       commit('setTrainingStatus', { status: 'getting', key: 'trainings' })
       api.apiCall({ url: 'Trainings' }).then(resp => {
@@ -44,12 +44,12 @@ const actions = {
         })
     })
   },
-  TRAININGS_POST: ({ commit, dispatch }, data) => {
+  POST_TRAININGS: ({ commit, dispatch }, data) => {
     return new Promise((resolve, reject) => {
       commit('setTrainingStatus', { status: 'posting', key: 'trainings' })
       api.apiCall({ url: 'Trainings', method: 'POST', data: data }).then(resp => {
         commit('setTrainingStatus', { status: 'success', key: 'trainings' })
-        dispatch('TRAININGS_GET')
+        dispatch('GET_TRAININGS')
         resolve(resp)
       })
         .catch(err => {
@@ -58,19 +58,44 @@ const actions = {
         })
     })
   },
-  TRAININGS_DELETE: ({ commit, dispatch }, id) => {
-    console.log('Trainings/' + id)
+  DELETE_TRAININGS: ({ commit, dispatch }, id) => {
     return new Promise((resolve, reject) => {
       commit('setTrainingStatus', { status: 'deleting', key: 'trainings' })
       api.apiCall({ url: 'Trainings/' + id, method: 'DELETE' }).then(resp => {
         commit('setTrainingStatus', { status: 'success', key: 'trainings' })
-        dispatch('TRAININGS_GET')
+        dispatch('GET_TRAININGS')
         resolve(resp)
       })
         .catch(err => {
           commit('setTrainingStatus', { status: 'error', key: 'trainings' })
           reject(err)
         })
+    })
+  },
+  GET_TRAINING_BY_ID: ({ commit }, id) => {
+    return new Promise((resolve, reject) => {
+      commit('setTrainingStatus', { status: 'getting', key: 'trainings' })
+      api.apiCall({ url: 'Trainings/' + id }).then(resp => {
+        commit('setTrainingStatus', { status: 'success', key: 'trainings' })
+        resolve(resp)
+      })
+        .catch(err => {
+          commit('setTrainingStatus', { status: 'error', key: 'trainings' })
+          reject(err)
+        })
+    })
+  },
+  PUT_TRAINING_BY_ID: ({ commit }, data) => {
+    console.log(data)
+    return new Promise((resolve, reject) => {
+      commit('setTrainingStatus', { status: 'putting', key: 'trainings'})
+      api.apiCall({ url: 'Trainings/' + data.id, method: 'PUT', data: data.data }).then(resp => {
+        commit('setTrainingStatus', { status: 'success', key: 'trainings'})
+        resolve(resp)
+      }).catch(err => {
+        commit('setTrainingStatus', { status: 'error', key: 'trainings'})
+        reject(err)
+      })
     })
   }
 }

@@ -3,14 +3,14 @@ import Vuex from 'vuex'
 
 import createPersistedState from 'vuex-persistedstate'
 
-import userAccount from './modules/userAccount'
+import staffAccount from './modules/staffAccount'
 import training from './modules/training'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    userAccount,
+    staffAccount,
     training
   },
   strict: true, //TODO Revisar este tema

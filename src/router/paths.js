@@ -72,25 +72,25 @@ const paths = [
     component: Trainings
   },
   {
-    path: '/trainings/:triningId',
+    path: '/trainings/:trainingId',
     meta: { breadcrumb: true },
     name: 'TrainingsTraining',
     component: TrainingsTraining
   },
   {
-    path: '/trainings/:triningId/:unitId',
+    path: '/trainings/:trainingId/:unitId',
     meta: { breadcrumb: true },
     name: 'TrainingsUnit',
     component: TrainingsUnit
   },
   {
-    path: '/trainings/:triningId/:unitId/:lessonId',
+    path: '/trainings/:trainingId/:unitId/:lessonId',
     meta: { breadcrumb: true },
     name: 'TrainingsLesson',
     component: TrainingsLesson
   },
   {
-    path: '/trainings/:triningId/:unitId/:lessonId/:stepId',
+    path: '/trainings/:trainingId/:unitId/:lessonId/:stepId',
     meta: { breadcrumb: true },
     name: 'TrainingsStep',
     component: TrainingsStep

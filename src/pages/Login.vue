@@ -38,12 +38,12 @@ export default {
     },
   }),
   mounted () {
-    this.USERACCOUNTS_LOGOUT()
+    this.STAFFACCOUNTS_LOGOUT()
   },
   methods: {
     ...mapActions([
-      'USERACCOUNTS_LOGIN',
-      'USERACCOUNTS_LOGOUT'
+      'AUTH_REQUEST',
+      'STAFFACCOUNTS_LOGOUT'
     ]),
     login () {
       this.loading = true
@@ -51,7 +51,7 @@ export default {
         username: this.model.username,
         password: this.model.password
       }
-      this.USERACCOUNTS_LOGIN(user).then((res) => {
+      this.AUTH_REQUEST(user).then((res) => {
         console.log(res)
         this.loading = false
         this.$router.push('/dashboard')

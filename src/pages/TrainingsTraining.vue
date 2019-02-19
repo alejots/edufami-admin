@@ -6,85 +6,29 @@
             <h3>Training: Nutrifami para todos</h3>
         </v-flex>
         <v-flex sm12>
-          <v-widget title="Basic Usage">
-            <div slot="widget-content">
-              <v-container>
-                <v-layout row>
-                  <v-flex xs4>
-                    <v-subheader>Training name</v-subheader>
+            <v-form ref="form" v-model="valid" lazy-validation>
+            <v-card-text>
+              <v-container grid-list-md>
+                <v-layout wrap>
+                  <v-flex xs12>
+                    <v-text-field label="Training name*" hint="The name of the training that the user can read" v-model="training.name" :counter="55" :rules="rules.name"  required></v-text-field>
                   </v-flex>
-                  <v-flex xs8>
-                    <v-text-field
-                      label="Training name help text"
-                      value="Nutrifami para todos"
-                      :rules="[rules.required]"
-                    ></v-text-field>
+                  <v-flex xs12>
+                    <v-textarea label="Description" hint="A short description that explains the content of the training" v-model="training.description" :counter="160" :rows="2" auto-grow></v-textarea>
                   </v-flex>
-                </v-layout>                
-                <v-layout row>
-                  <v-flex xs4>
-                    <v-subheader>Description</v-subheader>
+                  <v-flex xs12 sm6>
+                    <v-select :items="['Spanish', 'English', 'France']" label="Language" v-model="training.languageId"></v-select>
                   </v-flex>
-                  <v-flex xs8>
-                    <v-text-field
-                      name="description"
-                      label="Add the description of the training"
-                      value="Capacitacion inicial, para participantes del PMA"
-                      id="testing"
-                    ></v-text-field>
-                  </v-flex>
-                </v-layout>
-                <v-layout row>
-                  <v-flex xs4>
-                    <v-subheader>Long Description</v-subheader>
-                  </v-flex>
-                  <v-flex xs8>
-                    <v-text-field
-                      name="long-description"
-                      label="Add the long description of the training"
-                      value=""
-                    ></v-text-field>
-                  </v-flex>
-                </v-layout>
-                <v-layout row>
-                  <v-flex xs4>
-                    <v-subheader>General Learning Objective</v-subheader>
-                  </v-flex>
-                  <v-flex xs8>
-                    <v-text-field
-                      name="objective"
-                      label="Add the general learning objective"
-                      value=""
-                    ></v-text-field>
-                  </v-flex>
-                </v-layout>
-                <v-layout row>
-                  <v-flex xs4>
-                    <v-subheader>Reach of Learning</v-subheader>
-                  </v-flex>
-                  <v-flex xs8>
-                    <v-text-field
-                      name="reach"
-                      label="Reach of learning"
-                      value=""
-                    ></v-text-field>
-                  </v-flex>
-                </v-layout>
-                <v-layout row>
-                  <v-flex xs4>
-                    <v-subheader>Language </v-subheader>
-                  </v-flex>
-                  <v-flex xs8>
-                    <v-text-field
-                      name="language"
-                      label="Language of the training"
-                      value="Español"
-                    ></v-text-field>
+                  <v-flex xs12 sm6>
+                    <v-autocomplete :items="['Edufami', 'Nutrifami', 'Equfami', 'Climafami']" label="App"></v-autocomplete>
                   </v-flex>
                 </v-layout>
               </v-container>
-            </div>
-          </v-widget>
+              <small>*indicates required field</small>
+            </v-card-text>
+              <v-spacer></v-spacer>
+              <v-btn color="primary" dark @click="validate">Update</v-btn>
+          </v-form>
         </v-flex>
         <v-flex sm12>
             <h5>Units</h5>
@@ -112,71 +56,71 @@ export default {
   },
   data: () => ({
     loading: false,
-    email: '',
+    valid: true,
     rules: {
-      required: (value) => !!value || 'Required.',
-      email: (value) => {
-        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return pattern.test(value) || 'Invalid e-mail.';
-      }    
-    },
-    users: [
-        {
-          jobTitle: '4 Lessons',
-          name: 'Alimentación Saludable',
-          cardBgImage: '/static/bg/1.jpg',
-          dark: true,
-          /*avatar: {
-            src: 'https://randomuser.me/api/portraits/lego/1.jpg',
-            size: '36'
-          }*/  
-        },
-        {
-          jobTitle: '5 Lessons',
-          name: 'Combinaciones Saludables',
-          dark: true,
-          cardBgImage: '/static/bg/16.jpg',
-          /* avatar: {
-            src: 'https://randomuser.me/api/portraits/lego/2.jpg',
-            size: '36'
-          }, */ 
-        },
-        {
-          jobTitle: '5 Lessons',
-          name: 'Mujeres embarazadas',
-          dark: true,
-          cardBgImage: '/static/bg/4.jpg',
-          /* avatar: {
-            src: 'https://randomuser.me/api/portraits/lego/3.jpg',
-            size: '36'
-          }, */ 
-        },
-        {
-          jobTitle: '5 Lessons',
-          name: 'Manejo Adecuado de los Alimentos',
-          dark: true,
-          cardBgImage: '/static/bg/14.jpg',
-          /* avatar: {
-            src: 'https://randomuser.me/api/portraits/lego/4.jpg',
-            size: '36'
-          }, */ 
-        },
-        {
-          jobTitle: '5 Lessons',
-          name: 'Habitos Saludables',
-          dark: true,
-          cardBgImage: '/static/bg/15.jpg',
-          /* avatar: {
-            src: 'https://randomuser.me/api/portraits/lego/5.jpg',
-            size: '36'
-          }, */ 
-        }        
+      name: [
+        v => !!v || 'Training name is required',
+        v => (v && v.length <= 55) || 'Name must be less than 55 characters'
       ]
+    },
+    training: {
+      name: '',
+      description: ' ',
+      "descriptionAudio": "string",
+      "descriptionLong": "string",
+      "descriptionLongAudio": "string",
+      "zipFileUrl": "string",
+      "active": true,
+      "statusId": 0,
+      "imageId": 0,
+      languageId: '',
+      "ownerId": 0
+    }, 
+    users: [
+      {
+        jobTitle: '4 Lessons',
+        name: 'Alimentación Saludable',
+        cardBgImage: '/static/bg/1.jpg',
+        dark: true,
+        /*avatar: {
+          src: 'https://randomuser.me/api/portraits/lego/1.jpg',
+          size: '36'
+        }*/  
+      }       
+    ]
   }),
   computed: {},
   methods: {
-    ...mapActions([])
+    ...mapActions([
+      'GET_TRAINING_BY_ID',
+      'PUT_TRAINING_BY_ID'
+    ]),
+    reset () {
+      this.$refs.form.reset()
+      this.dialog = false
+    },
+    validate () {
+      if (this.$refs.form.validate()) {
+        this.loading = true
+        this.PUT_TRAINING_BY_ID({ id: this.$route.params.trainingId, data: this.training }).then(() => {
+          this.loading = false
+          window.getApp.$emit('SHOW_SNACKBAR', 'The training had been updated with success!!', 'green' );
+        }).catch((err) => {
+          this.loading = false
+          window.getApp.$emit('SHOW_SNACKBAR', err.response.data.error.message, 'red' );
+        })
+      }
+    }
   },
-  mounted () {}
+  mounted () {
+    this.loading = true
+    this.GET_TRAINING_BY_ID(this.$route.params.trainingId).then((resp) => {
+      this.training = resp.data
+      this.loading = false
+    }).catch((err) => {
+      this.loading = true
+      window.getApp.$emit('SHOW_SNACKBAR', err.response.data.error.message, 'red' );
+    })
+  }
 };
 </script>
