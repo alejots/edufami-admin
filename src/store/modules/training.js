@@ -16,9 +16,11 @@ function initialState () {
       "languageId": "string",
       "ownerId": 0
     },
+    currentTraining:{},
     trainings: [],
     status: {
-      trainings: ''
+      trainings: '',
+      trainingUnits: ''
     }
   }
 }
@@ -27,6 +29,7 @@ const state = initialState
 
 const getters = {
   getTrainings: state => state.trainings,
+  getCurrentTraining: state => state.currentTraining
 }
 
 const actions = {
@@ -72,12 +75,17 @@ const actions = {
         })
     })
   },
+  // Using this action to call all the data related to a training
+  GET_TRAINING_DATA: async ({ dispatch }, id) => {
+    await dispatch('GET_TRAINING_BY_ID', id)
+  },
   GET_TRAINING_BY_ID: ({ commit }, id) => {
     return new Promise((resolve, reject) => {
       commit('setTrainingStatus', { status: 'getting', key: 'trainings' })
       api.apiCall({ url: 'Trainings/' + id }).then(resp => {
         commit('setTrainingStatus', { status: 'success', key: 'trainings' })
-        resolve(resp)
+        commit('setCurrentTraining', resp.data)
+        resolve()
       })
         .catch(err => {
           commit('setTrainingStatus', { status: 'error', key: 'trainings' })
@@ -97,6 +105,20 @@ const actions = {
         reject(err)
       })
     })
+  }, 
+  GET_TRAINING_UNITS_BY_ID: ({ commit }, id) => {
+    return new Promise ((resolve, reject) => {
+      commit('setTrainingStatus', { status: 'getting', key: 'trainingUnits'})
+      api.apiCall({url:'Trainings/' + id + '/units'}).then(resp => {
+        commit('setTrainingStatus', {status: 'success', key: 'trainingUnits'})
+        console.log(resp)
+        resolve(resp)
+      }).catch(err => {
+        commit('setTrainingStatus', {status: 'error', key: 'trainingUnits'})
+        console.log(err)
+        reject(err)
+      })
+    })
   }
 }
 
@@ -106,6 +128,9 @@ const mutations = {
   },
   setTrainings: (state, data) => {
     state.trainings = data
+  },
+  setCurrentTraining: (state, data) => {
+    state.currentTraining = data
   },
   trainingReset: (state) => {
     const s = initialState()

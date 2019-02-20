@@ -11,13 +11,13 @@
               <v-container grid-list-md>
                 <v-layout wrap>
                   <v-flex xs12>
-                    <v-text-field label="Training name*" hint="The name of the training that the user can read" v-model="training.name" :counter="55" :rules="rules.name"  required></v-text-field>
+                    <v-text-field label="Training name*" hint="The name of the training that the user can read" v-model="currentTraining.name" :counter="55" :rules="rules.name"  required></v-text-field>
                   </v-flex>
                   <v-flex xs12>
-                    <v-textarea label="Description" hint="A short description that explains the content of the training" v-model="training.description" :counter="160" :rows="2" auto-grow></v-textarea>
+                    <v-textarea label="Description" hint="A short description that explains the content of the training" v-model="currentTraining.description" :counter="160" :rows="2" auto-grow></v-textarea>
                   </v-flex>
                   <v-flex xs12 sm6>
-                    <v-select :items="['Spanish', 'English', 'France']" label="Language" v-model="training.languageId"></v-select>
+                    <v-select :items="['Spanish', 'English', 'France']" label="Language" v-model="currentTraining.languageId"></v-select>
                   </v-flex>
                   <v-flex xs12 sm6>
                     <v-autocomplete :items="['Edufami', 'Nutrifami', 'Equfami', 'Climafami']" label="App"></v-autocomplete>
@@ -47,7 +47,7 @@
 
 <script>
 
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import UnitCard from '@/components/widgets/card/UnitCard';
 
 export default {
@@ -63,19 +63,6 @@ export default {
         v => (v && v.length <= 55) || 'Name must be less than 55 characters'
       ]
     },
-    training: {
-      name: '',
-      description: ' ',
-      "descriptionAudio": "string",
-      "descriptionLong": "string",
-      "descriptionLongAudio": "string",
-      "zipFileUrl": "string",
-      "active": true,
-      "statusId": 0,
-      "imageId": 0,
-      languageId: '',
-      "ownerId": 0
-    }, 
     users: [
       {
         jobTitle: '4 Lessons',
@@ -89,10 +76,14 @@ export default {
       }       
     ]
   }),
-  computed: {},
+  computed: {
+    ...mapGetters({
+      'currentTraining': 'getCurrentTraining'
+    })
+  },
   methods: {
     ...mapActions([
-      'GET_TRAINING_BY_ID',
+      'GET_TRAINING_DATA',
       'PUT_TRAINING_BY_ID'
     ]),
     reset () {
@@ -114,11 +105,10 @@ export default {
   },
   mounted () {
     this.loading = true
-    this.GET_TRAINING_BY_ID(this.$route.params.trainingId).then((resp) => {
-      this.training = resp.data
+    this.GET_TRAINING_DATA(this.$route.params.trainingId).then(() => {
       this.loading = false
     }).catch((err) => {
-      this.loading = true
+      this.loading = false
       window.getApp.$emit('SHOW_SNACKBAR', err.response.data.error.message, 'red' );
     })
   }
