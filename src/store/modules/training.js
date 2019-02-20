@@ -1,5 +1,7 @@
 import * as api from '@/api/api'
 
+import { getField, updateField } from 'vuex-map-fields';
+
 function initialState () {
   return {
     training: {
@@ -17,6 +19,7 @@ function initialState () {
       "ownerId": 0
     },
     currentTraining:{},
+    currentTrainingUnits:[],
     trainings: [],
     status: {
       trainings: '',
@@ -29,7 +32,11 @@ const state = initialState
 
 const getters = {
   getTrainings: state => state.trainings,
-  getCurrentTraining: state => state.currentTraining
+  getCurrentTraining: state => state.currentTraining,
+  getCurrentTrainingUnits: state => state.currentTrainingUnits,
+  getCurrentTrainingField(state) {
+    return getField(state.currentTraining);
+  }
 }
 
 const actions = {
@@ -78,6 +85,7 @@ const actions = {
   // Using this action to call all the data related to a training
   GET_TRAINING_DATA: async ({ dispatch }, id) => {
     await dispatch('GET_TRAINING_BY_ID', id)
+    await dispatch('GET_TRAINING_UNITS_BY_ID', id)
   },
   GET_TRAINING_BY_ID: ({ commit }, id) => {
     return new Promise((resolve, reject) => {
@@ -93,11 +101,11 @@ const actions = {
         })
     })
   },
-  PUT_TRAINING_BY_ID: ({ commit }, data) => {
-    console.log(data)
+  PUT_TRAINING_BY_ID: ({ commit, state }, id) => {
     return new Promise((resolve, reject) => {
       commit('setTrainingStatus', { status: 'putting', key: 'trainings'})
-      api.apiCall({ url: 'Trainings/' + data.id, method: 'PUT', data: data.data }).then(resp => {
+      console.log(state.currentTraining)
+      api.apiCall({ url: 'Trainings/' + id, method: 'PUT', data: state.currentTraining }).then(resp => {
         commit('setTrainingStatus', { status: 'success', key: 'trainings'})
         resolve(resp)
       }).catch(err => {
@@ -111,8 +119,8 @@ const actions = {
       commit('setTrainingStatus', { status: 'getting', key: 'trainingUnits'})
       api.apiCall({url:'Trainings/' + id + '/units'}).then(resp => {
         commit('setTrainingStatus', {status: 'success', key: 'trainingUnits'})
-        console.log(resp)
-        resolve(resp)
+        commit('setCurrentTrainingUnits', resp.data)
+        resolve()
       }).catch(err => {
         commit('setTrainingStatus', {status: 'error', key: 'trainingUnits'})
         console.log(err)
@@ -131,6 +139,12 @@ const mutations = {
   },
   setCurrentTraining: (state, data) => {
     state.currentTraining = data
+  },
+  setCurrentTrainingUnits: (state, data) => {
+    state.currentTrainingUnits = data
+  },
+  updateCurrentTrainingField(state, field) {
+    updateField(state.currentTraining, field);
   },
   trainingReset: (state) => {
     const s = initialState()

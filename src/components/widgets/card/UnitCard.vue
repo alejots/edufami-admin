@@ -19,7 +19,7 @@
         </v-avatar>
         <div class="flex" :class="computeTextAlgin">
           <div class="subheading">{{name}}</div>
-          <span class="caption">{{jobTitle}}</span>
+          <span class="caption">{{description}}</span>
         </div>
       </div>
     </v-card-text>
@@ -52,7 +52,7 @@ export default {
       type: Object,
       default: null
     },
-    jobTitle: {
+    description: {
       type: String,
       default: ''
     },
