@@ -4,25 +4,12 @@ import { getField, updateField } from 'vuex-map-fields';
 
 function initialState () {
   return {
-    training: {
-      "name": "string",
-      "nameAudio": "string",
-      "description": "string",
-      "descriptionAudio": "string",
-      "descriptionLong": "string",
-      "descriptionLongAudio": "string",
-      "zipFileUrl": "string",
-      "active": true,
-      "statusId": 0,
-      "imageId": 0,
-      "languageId": "string",
-      "ownerId": 0
-    },
-    currentTraining:{},
-    currentTrainingUnits:[],
+    training: {}, // It is used in the add and edit forms  
+    trainingUnits:[],
     trainings: [],
     status: {
       trainings: '',
+      training: '',
       trainingUnits: ''
     }
   }
@@ -32,10 +19,11 @@ const state = initialState
 
 const getters = {
   getTrainings: state => state.trainings,
-  getCurrentTraining: state => state.currentTraining,
-  getCurrentTrainingUnits: state => state.currentTrainingUnits,
-  getCurrentTrainingField(state) {
-    return getField(state.currentTraining);
+  getTraining: state => state.training,
+  getTrainingRules: state => state.trainingRules, // Rules for forms
+  getTrainingUnits: state => state.trainingUnits,
+  getTrainingField(state) {
+    return getField(state.training);
   }
 }
 
@@ -54,10 +42,10 @@ const actions = {
         })
     })
   },
-  POST_TRAININGS: ({ commit, dispatch }, data) => {
+  POST_TRAININGS: ({ state, commit, dispatch }) => {
     return new Promise((resolve, reject) => {
       commit('setTrainingStatus', { status: 'posting', key: 'trainings' })
-      api.apiCall({ url: 'Trainings', method: 'POST', data: data }).then(resp => {
+      api.apiCall({ url: 'Trainings', method: 'POST', data: state.training }).then(resp => {
         commit('setTrainingStatus', { status: 'success', key: 'trainings' })
         dispatch('GET_TRAININGS')
         resolve(resp)
@@ -92,7 +80,7 @@ const actions = {
       commit('setTrainingStatus', { status: 'getting', key: 'trainings' })
       api.apiCall({ url: 'Trainings/' + id }).then(resp => {
         commit('setTrainingStatus', { status: 'success', key: 'trainings' })
-        commit('setCurrentTraining', resp.data)
+        commit('setTraining', resp.data)
         resolve()
       })
         .catch(err => {
@@ -104,8 +92,8 @@ const actions = {
   PUT_TRAINING_BY_ID: ({ commit, state }, id) => {
     return new Promise((resolve, reject) => {
       commit('setTrainingStatus', { status: 'putting', key: 'trainings'})
-      console.log(state.currentTraining)
-      api.apiCall({ url: 'Trainings/' + id, method: 'PUT', data: state.currentTraining }).then(resp => {
+      console.log(state.training)
+      api.apiCall({ url: 'Trainings/' + id, method: 'PUT', data: state.training }).then(resp => {
         commit('setTrainingStatus', { status: 'success', key: 'trainings'})
         resolve(resp)
       }).catch(err => {
@@ -119,7 +107,7 @@ const actions = {
       commit('setTrainingStatus', { status: 'getting', key: 'trainingUnits'})
       api.apiCall({url:'Trainings/' + id + '/units'}).then(resp => {
         commit('setTrainingStatus', {status: 'success', key: 'trainingUnits'})
-        commit('setCurrentTrainingUnits', resp.data)
+        commit('setTrainingUnits', resp.data)
         resolve()
       }).catch(err => {
         commit('setTrainingStatus', {status: 'error', key: 'trainingUnits'})
@@ -137,14 +125,14 @@ const mutations = {
   setTrainings: (state, data) => {
     state.trainings = data
   },
-  setCurrentTraining: (state, data) => {
-    state.currentTraining = data
+  setTraining: (state, data) => {
+    state.training = data
   },
-  setCurrentTrainingUnits: (state, data) => {
-    state.currentTrainingUnits = data
+  setTrainingUnits: (state, data) => {
+    state.trainingUnits = data
   },
-  updateCurrentTrainingField(state, field) {
-    updateField(state.currentTraining, field);
+  updateTrainingField(state, field) {
+    updateField(state.training, field);
   },
   trainingReset: (state) => {
     const s = initialState()

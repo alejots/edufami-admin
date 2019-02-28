@@ -30,7 +30,7 @@
         <v-flex sm12>
             <h5>Units</h5>
         </v-flex>
-        <v-flex lg3 sm6 v-for="(item,index) in currentUnits" :key=" 'bottom-nav' + index">
+        <v-flex lg3 sm6 v-for="(item,index) in trainingUnits" :key=" 'bottom-nav' + index">
           <unit-card
             bottom-nav
             v-bind="item"
@@ -39,7 +39,7 @@
         </v-flex>    
       </v-layout>
     </v-container>
-    <v-layout row justify-center>
+    <!--<v-layout row justify-center>
       <v-dialog v-model="dialog" persistent max-width="600px">
         <v-btn slot="activator" color="primary" dark fab fixed bottom right>
           <v-icon dark>add</v-icon>
@@ -76,7 +76,7 @@
           </v-form>
         </v-card>
       </v-dialog>
-    </v-layout>
+    </v-layout>-->
   </div>
 </template>
 
@@ -91,8 +91,8 @@ import { createHelpers } from 'vuex-map-fields';
 // here, must be the same as the function names we've
 // used in the store.
 const { mapFields } = createHelpers({
-  getterType: 'getCurrentTrainingField',
-  mutationType: 'updateCurrentTrainingField',
+  getterType: 'getTrainingField',
+  mutationType: 'updateTrainingField',
 });
 
 export default {
@@ -107,25 +107,12 @@ export default {
         v => !!v || 'Training name is required',
         v => (v && v.length <= 55) || 'Name must be less than 55 characters'
       ]
-    },
-    training: {
-      name: '',
-      description: ' ',
-      "descriptionAudio": "string",
-      "descriptionLong": "string",
-      "descriptionLongAudio": "string",
-      "zipFileUrl": "string",
-      "active": true,
-      "statusId": 0,
-      "imageId": 0,
-      languageId: '',
-      "ownerId": 0
     }
   }),
   computed: {
     ...mapGetters({
-      'currentTraining': 'getCurrentTraining',
-      'currentUnits': 'getCurrentTrainingUnits'
+      'training': 'getTraining',
+      'trainingUnits': 'getTrainingUnits'
     }),
     ...mapFields([
       'name',

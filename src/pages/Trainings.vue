@@ -21,13 +21,13 @@
               <v-container grid-list-md>
                 <v-layout wrap>
                   <v-flex xs12>
-                    <v-text-field label="Training name*" hint="The name of the training that the user can read" v-model="training.name" :counter="55" :rules="rules.name"  required></v-text-field>
+                    <v-text-field label="Training name*" hint="The name of the training that the user can read" v-model="name" :counter="55" :rules="rules.name"  required></v-text-field>
                   </v-flex>
                   <v-flex xs12>
-                    <v-textarea label="Description" hint="A short description that explains the content of the training" v-model="training.description" :counter="160" :rows="2" auto-grow></v-textarea>
+                    <v-textarea label="Description" hint="A short description that explains the content of the training" v-model="description" :counter="160" :rows="2" auto-grow></v-textarea>
                   </v-flex>
                   <v-flex xs12 sm6>
-                    <v-select :items="['Spanish', 'English', 'France']" label="Language" v-model="training.languageId"></v-select>
+                    <v-select :items="['Spanish', 'English', 'France']" label="Language" v-model="languageId"></v-select>
                   </v-flex>
                   <v-flex xs12 sm6>
                     <v-autocomplete :items="['Edufami', 'Nutrifami', 'Equfami', 'Climafami']" label="App"></v-autocomplete>
@@ -50,9 +50,19 @@
 
 <script>
 
-import { mapActions } from 'vuex'
-
 import TableTrainings from '@/components/widgets/tables/TableTrainings';
+
+import { mapActions, mapGetters } from 'vuex'
+import { createHelpers } from 'vuex-map-fields';
+
+// The getter and mutation types we're providing
+// here, must be the same as the function names we've
+// used in the store.
+const { mapFields } = createHelpers({
+  getterType: 'getTrainingField',
+  mutationType: 'updateTrainingField',
+});
+
 export default {
   components: {
     TableTrainings    
@@ -66,22 +76,18 @@ export default {
         v => !!v || 'Training name is required',
         v => (v && v.length <= 55) || 'Name must be less than 55 characters'
       ]
-    },
-    training: {
-      name: '',
-      description: ' ',
-      "descriptionAudio": "string",
-      "descriptionLong": "string",
-      "descriptionLongAudio": "string",
-      "zipFileUrl": "string",
-      "active": true,
-      "statusId": 0,
-      "imageId": 0,
-      languageId: '',
-      "ownerId": 0
     }
   }),
-  computed: {},
+  computed: {
+    ...mapFields([
+      'name',
+      'description',
+      'languageId'
+    ]),
+    ...mapGetters({
+      'trainingRules': 'getTrainingRules'
+    })
+  },
   methods: {
     ...mapActions([
       'GET_TRAININGS',
@@ -94,7 +100,7 @@ export default {
     validate () {
       if (this.$refs.form.validate()) {
         this.loading = true
-        this.POST_TRAININGS(this.training).then(() => {
+        this.POST_TRAININGS().then(() => {
           this.loading = false
           window.getApp.$emit('SHOW_SNACKBAR', 'The training had been saved with success!!', 'green' );
           this.$refs.form.reset()
