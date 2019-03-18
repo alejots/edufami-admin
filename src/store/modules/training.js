@@ -21,7 +21,7 @@ const getters = {
 
 const mutations = {
   setTrainingStatus: (state, data) => {
-    state.status[data.key] = data.status;
+    state.status = data;
   },
   setTrainings: (state, data) => {
     state.trainings = data;
@@ -83,7 +83,6 @@ const actions = {
   },
 
   postUnitbyTraining: ({ commit }, { trainingId, data }) => {
-    console.log(trainingId, data);
     return new Promise(resolve => {
       http
         .post(`Trainings/${trainingId}/units`, data)
@@ -137,6 +136,6 @@ const actions = {
 export default {
   state,
   getters,
-  actions,
-  mutations
+  mutations,
+  actions
 };

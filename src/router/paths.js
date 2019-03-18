@@ -3,8 +3,8 @@ import Login from "@/pages/Login.vue";
 import Dashboard from "@/pages/Dashboard.vue";
 import Trainings from "@/pages/Trainings.vue";
 import Training from "@/pages/Training.vue";
-import TrainingsUnit from "@/pages/TrainingsUnit.vue";
-import TrainingsLesson from "@/pages/TrainingsLesson.vue";
+import Unit from "@/pages/Unit.vue";
+import Lesson from "@/pages/Lesson.vue";
 import TrainingsStep from "@/pages/TrainingsStep.vue";
 
 const paths = [
@@ -78,14 +78,14 @@ const paths = [
   {
     path: "/trainings/:trainingId/:unitId",
     meta: { breadcrumb: true },
-    name: "TrainingsUnit",
-    component: TrainingsUnit
+    name: "Unit",
+    component: Unit
   },
   {
     path: "/trainings/:trainingId/:unitId/:lessonId",
     meta: { breadcrumb: true },
-    name: "TrainingsLesson",
-    component: TrainingsLesson
+    name: "Lesson",
+    component: Lesson
   },
   {
     path: "/trainings/:trainingId/:unitId/:lessonId/:stepId",
