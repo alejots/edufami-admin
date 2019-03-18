@@ -1,34 +1,33 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import paths from './paths'
-import store from '@/store'
-import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
+import Vue from "vue";
+import Router from "vue-router";
+import paths from "./paths";
+import store from "@/store";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 
-Vue.use(Router)
+Vue.use(Router);
 const router = new Router({
-    base: '/',
-    mode: 'hash',
-    linkActiveClass: 'active',
-    routes: paths
-})
+  base: "/",
+  mode: "hash",
+  linkActiveClass: "active",
+  routes: paths
+});
 // router gards
 router.beforeEach((to, from, next) => {
-    NProgress.start()
-    if (store.getters.isAuthenticated) {
-      next()
+  NProgress.start();
+  if (store.getters.isAuthenticated) {
+    next();
+  } else {
+    if (to.name === "Login") {
+      next();
     } else {
-        if (to.name === 'Login') {
-            next()
-        } else {
-            next('/')
-        }
+      next("/");
     }
-})
+  }
+});
 
-router.afterEach((to, from) => {
-    console.log(to, from)
-    NProgress.done()
-})
+router.afterEach(() => {
+  NProgress.done();
+});
 
-export default router
+export default router;

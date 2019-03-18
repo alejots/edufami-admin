@@ -1,29 +1,28 @@
-import NotFound from '@/pages/NotFound.vue'
-import Login from '@/pages/Login.vue'
-import Dashboard from '@/pages/Dashboard.vue'
-import Trainings from '@/pages/Trainings.vue'
-import TrainingsTraining from '@/pages/TrainingsTraining.vue'
-import TrainingsUnit from '@/pages/TrainingsUnit.vue'
-import TrainingsLesson from '@/pages/TrainingsLesson.vue'
-import TrainingsStep from '@/pages/TrainingsStep.vue'
-
+import NotFound from "@/pages/NotFound.vue";
+import Login from "@/pages/Login.vue";
+import Dashboard from "@/pages/Dashboard.vue";
+import Trainings from "@/pages/Trainings.vue";
+import Training from "@/pages/Training.vue";
+import TrainingsUnit from "@/pages/TrainingsUnit.vue";
+import TrainingsLesson from "@/pages/TrainingsLesson.vue";
+import TrainingsStep from "@/pages/TrainingsStep.vue";
 
 const paths = [
   {
-    path: '*',
+    path: "*",
     meta: {
       public: true
     },
     redirect: {
-      path: '/404'
+      path: "/404"
     }
   },
   {
-    path: '/404',
+    path: "/404",
     meta: {
       public: true
     },
-    name: 'NotFound',
+    name: "NotFound",
     component: NotFound
   },
   // {
@@ -51,50 +50,49 @@ const paths = [
   //   )
   // },
   {
-    path: '/',
+    path: "/",
     meta: {
       public: true
     },
-    name: 'Login',
+    name: "Login",
     component: Login
   },
   {
-    path: '/dashboard',
+    path: "/dashboard",
     meta: { breadcrumb: true },
-    name: 'Dashboard',
-    component: Dashboard,
-
+    name: "Dashboard",
+    component: Dashboard
   },
   {
-    path: '/trainings',
+    path: "/trainings",
     meta: { breadcrumb: true },
-    name: 'Trainings',
+    name: "Trainings",
     component: Trainings
   },
   {
-    path: '/trainings/:trainingId',
+    path: "/trainings/:trainingId",
     meta: { breadcrumb: true },
-    name: 'TrainingsTraining',
-    component: TrainingsTraining
+    name: "Training",
+    component: Training
   },
   {
-    path: '/trainings/:trainingId/:unitId',
+    path: "/trainings/:trainingId/:unitId",
     meta: { breadcrumb: true },
-    name: 'TrainingsUnit',
+    name: "TrainingsUnit",
     component: TrainingsUnit
   },
   {
-    path: '/trainings/:trainingId/:unitId/:lessonId',
+    path: "/trainings/:trainingId/:unitId/:lessonId",
     meta: { breadcrumb: true },
-    name: 'TrainingsLesson',
+    name: "TrainingsLesson",
     component: TrainingsLesson
   },
   {
-    path: '/trainings/:trainingId/:unitId/:lessonId/:stepId',
+    path: "/trainings/:trainingId/:unitId/:lessonId/:stepId",
     meta: { breadcrumb: true },
-    name: 'TrainingsStep',
+    name: "TrainingsStep",
     component: TrainingsStep
-  },
+  }
   // {
   //   path: '/media',
   //   meta: { },
@@ -603,6 +601,6 @@ const paths = [
   //     `@/pages/widgets/List.vue`
   //   )
   // },
-]
+];
 
-export default paths
+export default paths;

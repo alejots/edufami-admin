@@ -12,7 +12,7 @@
             <router-view></router-view>
           </div>
           <!-- App Footer -->
-          <v-footer height="auto" class="white pa-3 app--footer" fixed>
+          <v-footer height="auto" class="white pa-3 app--footer">
             <span class="caption">WFP &copy; {{ new Date().getFullYear() }}</span>
             <v-spacer></v-spacer>
             <span class="caption mr-1">Developed by Alejandro Tunaroza</span>
@@ -61,4 +61,7 @@ export default {
 
 
 <style lang="stylus" scoped>
+body {
+  padding-bottom: 3rem;
+}
 </style>
