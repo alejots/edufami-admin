@@ -7,7 +7,7 @@
             <td v-for="(i,key) in headers" :key="key">
               <router-link
                 v-if="i.value === 'name'"
-                :to="`/trainings/${training.id}/${scope.item.id}`"
+                :to="`/unit/${scope.item.id}`"
               >{{scope.item[i.value]}}</router-link>
               <span v-else>{{scope.item[i.value]}}</span>
             </td>
@@ -31,9 +31,8 @@ export default {
     };
   },
   beforeMount() {
-    console.log(this.training);
     this.headers = [
-      { text: "ID", value: "id" },
+      { text: "Order", value: "order" },
       { text: "Name", value: "name" },
       { text: "Description", value: "description" }
     ];

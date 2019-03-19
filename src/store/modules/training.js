@@ -70,6 +70,24 @@ const actions = {
     });
   },
 
+  patchTraining: ({ commit }, data) => {
+    return new Promise(resolve => {
+      http
+        .patch(`Trainings/${data.id}`, data)
+        .then(({ data }) => {
+          commit("setTraining", data);
+          resolve();
+        })
+        .catch(error => {
+          Toastify({
+            text: `${error.name}: ${error.message}`,
+            duration: 10000,
+            backgroundColor: "linear-gradient(to right, #FF0010, #ff0000)"
+          }).showToast();
+        });
+    });
+  },
+
   getTraining: ({ commit }, id) => {
     http.get(`Trainings/${id}`).then(({ data }) => {
       commit("setTraining", data);

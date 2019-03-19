@@ -7,12 +7,14 @@
       <v-flex lg2 sm2 xs2></v-flex>
     </v-layout>
     <v-layout row wrap>
-      <v-flex lg4>
+      <v-flex lg12>
         <TrainingCard/>
-        <TrainingForm label="Edit Training"/>
+        <TrainingForm :data="training" label="Edit Training"/>
       </v-flex>
-      <v-flex lg8>
-        <UnitsTable :training="training"/>
+    </v-layout>
+    <v-layout row wrap>
+      <v-flex lg12>
+        <UnitsTable/>
         <UnitForm :training="training" label="Add Unit"/>
       </v-flex>
     </v-layout>
@@ -41,6 +43,7 @@ export default {
     ...mapActions(["getTraining", "getUnitsbyTraining"])
   },
   beforeMount() {
+    console.log("Training - BeforeMount");
     const { trainingId } = this.$route.params;
     this.loading = true;
     this.getTraining(trainingId);

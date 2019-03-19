@@ -2,12 +2,12 @@
   <v-card>
     <v-card-text class="pa-0">
       <template>
-        <v-data-table :headers="headers" :items="unitLessons" hide-actions class="elevation-0">
+        <v-data-table :headers="headers" :items="lessonSteps" hide-actions class="elevation-0">
           <template slot="items" slot-scope="scope">
             <td v-for="(i,key) in headers" :key="key">
               <router-link
-                v-if="i.value === 'name'"
-                :to="`/lesson/${scope.item.id}`"
+                v-if="i.value === 'question'"
+                :to="`/step/${scope.item.id}`"
               >{{scope.item[i.value]}}</router-link>
               <span v-else>{{scope.item[i.value]}}</span>
             </td>
@@ -21,6 +21,7 @@
 import { mapGetters } from "vuex";
 export default {
   components: {},
+  props: {},
   data() {
     return {
       headers: [],
@@ -30,12 +31,13 @@ export default {
   beforeMount() {
     this.headers = [
       { text: "Order", value: "order" },
-      { text: "Name", value: "name" },
-      { text: "Description", value: "description" }
+      { text: "Instruction", value: "instruction" },
+      { text: "Question", value: "question" },
+      { text: "Type of question", value: "type" }
     ];
   },
   computed: {
-    ...mapGetters(["unitLessons"])
+    ...mapGetters(["lessonSteps"])
   },
   methods: {}
 };

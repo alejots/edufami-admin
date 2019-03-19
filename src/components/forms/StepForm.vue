@@ -12,7 +12,7 @@
               <v-layout wrap>
                 <v-flex xs12 v-for="(item, key) in form" :key="key">
                   <v-text-field
-                    :label="item.label + (item.required ? '*':'')"
+                    :label="item.label"
                     :hint="item.hint"
                     :counter="item.counter"
                     :required="item.required"
@@ -40,62 +40,68 @@ import { mapActions } from "vuex";
 export default {
   props: {
     label: String,
-    data: {
-      type: Object,
-      default: () => {
-        return {};
-      }
-    }
+    lessonId: Number
   },
   data: () => ({
     dialog: false,
     valid: false,
     form: [
       {
-        model: "name",
+        model: "order",
         type: "text",
-        label: "Training Name",
-        hint: "The name of the training that the user can read",
+        label: "Order",
+        hint: "Order",
+        counter: 55,
+        required: true,
+        rules: [v => !!v || "Order is required"]
+      },
+      {
+        model: "type",
+        type: "select",
+        label: "Type of Step",
+        hint: "Select the type of question",
+        required: true
+      },
+      {
+        model: "instruction",
+        type: "text",
+        label: "Instruction",
+        hint: "The name of the lesson that the user can read",
         counter: 55,
         required: true,
         rules: [
-          v => !!v || "Training name is required",
+          v => !!v || "Instruction is required",
           v => (v && v.length <= 55) || "Name must be less than 55 characters"
         ]
       },
       {
-        model: "description",
+        model: "question",
         type: "text",
-        label: "Description",
-        hint: "A short description that explains the content of the training",
-        counter: 160,
-        required: false
+        label: "Question",
+        hint: "QUestion",
+        counter: 1500,
+        required: true,
+        rules: [
+          v => !!v || "Question is required",
+          v => (v && v.length <= 1500) || "Name must be less than 55 characters"
+        ]
       }
     ],
     formData: {}
   }),
   computed: {},
-  beforeMount() {
-    console.log("TrainingForm - BeforeMount");
-    this.formData = { ...this.data };
-  },
   methods: {
-    ...mapActions(["postTraining", "patchTraining"]),
+    ...mapActions(["postStep"]),
     handleSave() {
       if (this.$refs.form.validate()) {
-        if (this.formData.id) {
-          this.patchTraining(this.formData).then(() => {
-            this.handleClose();
-          });
-        } else {
-          this.postTraining(this.formData).then(() => {
-            this.handleClose();
-          });
-        }
+        this.formData["lessonId"] = this.lessonId;
+        this.postStep(this.formData).then(() => {
+          this.handleClose();
+        });
       }
     },
     handleClose() {
-      // this.$refs.form.reset();
+      this.$refs.form.reset();
       this.dialog = false;
     }
   }

@@ -1,11 +1,11 @@
 import NotFound from "@/pages/NotFound.vue";
 import Login from "@/pages/Login.vue";
-import Dashboard from "@/pages/Dashboard.vue";
+// import Dashboard from "@/pages/Dashboard.vue";
 import Trainings from "@/pages/Trainings.vue";
 import Training from "@/pages/Training.vue";
 import Unit from "@/pages/Unit.vue";
 import Lesson from "@/pages/Lesson.vue";
-import TrainingsStep from "@/pages/TrainingsStep.vue";
+import Step from "@/pages/Step.vue";
 
 const paths = [
   {
@@ -61,37 +61,31 @@ const paths = [
     path: "/dashboard",
     meta: { breadcrumb: true },
     name: "Dashboard",
-    component: Dashboard
-  },
-  {
-    path: "/trainings",
-    meta: { breadcrumb: true },
-    name: "Trainings",
     component: Trainings
   },
   {
-    path: "/trainings/:trainingId",
+    path: "/training/:trainingId",
     meta: { breadcrumb: true },
     name: "Training",
     component: Training
   },
   {
-    path: "/trainings/:trainingId/:unitId",
+    path: "/unit/:unitId",
     meta: { breadcrumb: true },
     name: "Unit",
     component: Unit
   },
   {
-    path: "/trainings/:trainingId/:unitId/:lessonId",
+    path: "/lesson/:lessonId",
     meta: { breadcrumb: true },
     name: "Lesson",
     component: Lesson
   },
   {
-    path: "/trainings/:trainingId/:unitId/:lessonId/:stepId",
+    path: "/step/:stepId",
     meta: { breadcrumb: true },
-    name: "TrainingsStep",
-    component: TrainingsStep
+    name: "Step",
+    component: Step
   }
   // {
   //   path: '/media',

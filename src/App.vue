@@ -2,7 +2,7 @@
   <div id="appRoot">
     <template v-if="!$route.meta.public">
       <v-app id="inspire" class="app">
-        <app-drawer class="app--drawer"></app-drawer>
+        <AppSideBar class="app--drawer"/>
         <app-toolbar class="app--toolbar"></app-toolbar>
         <v-content>
           <!-- Page Header -->
@@ -34,14 +34,14 @@
   </div>
 </template>
 <script>
-import AppDrawer from "@/components/AppDrawer";
+import AppSideBar from "@/components/template/AppSideBar";
 import AppToolbar from "@/components/AppToolbar";
 import AppFab from "@/components/AppFab";
 import PageHeader from "@/components/template/PageHeader";
 // import menu from '@/api/menu';
 export default {
   components: {
-    AppDrawer,
+    AppSideBar,
     AppToolbar,
     AppFab,
     PageHeader

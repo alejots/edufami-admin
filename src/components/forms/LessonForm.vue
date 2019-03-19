@@ -47,6 +47,15 @@ export default {
     valid: false,
     form: [
       {
+        model: "order",
+        type: "text",
+        label: "Order",
+        hint: "",
+        counter: 55,
+        required: true,
+        rules: [v => !!v || "Order name is required"]
+      },
+      {
         model: "name",
         type: "text",
         label: "Lesson Name",

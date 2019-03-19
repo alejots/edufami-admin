@@ -1,16 +1,11 @@
 const Menu = [
+  { header: "Trainings" },
   {
-    title: 'Dashboard',
-    icon: 'dashboard',
-    name: 'Dashboard'
-  },
-  { header: 'Trainings' },
-  {
-    title: 'Trainings',
-    group: 'trainings',
-    icon: 'book',
-    name: 'Trainings'
-  },
+    title: "Trainings",
+    icon: "dashboard",
+    name: "Dashboard"
+  }
+
   // {
   //   title: 'Inbox',
   //   group: 'apps',
@@ -121,16 +116,16 @@ const Menu = [
   //     { name: '500', title: '500', component: 'ServerError' }
   //   ]
   // }
-]
+];
 // reorder menu
-Menu.forEach((item) => {
+Menu.forEach(item => {
   if (item.items) {
     item.items.sort((x, y) => {
-      const textA = x.title.toUpperCase()
-      const textB = y.title.toUpperCase()
-      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0
-    })
+      const textA = x.title.toUpperCase();
+      const textB = y.title.toUpperCase();
+      return textA < textB ? -1 : textA > textB ? 1 : 0;
+    });
   }
-})
+});
 
-export default Menu
+export default Menu;

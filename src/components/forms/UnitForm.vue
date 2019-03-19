@@ -40,7 +40,13 @@ import { mapActions } from "vuex";
 export default {
   props: {
     label: String,
-    training: Object
+    training: Object,
+    data: {
+      type: Object,
+      default: () => {
+        return {};
+      }
+    }
   },
   data: () => ({
     dialog: false,
@@ -64,28 +70,45 @@ export default {
         label: "Description",
         hint: "A short description that explains the content of the unit",
         counter: 160,
-        required: true
+        required: false
+      },
+      {
+        model: "order",
+        type: "text",
+        label: "Order",
+        hint: "",
+        counter: 160,
+        required: false
       }
     ],
     formData: {}
   }),
   computed: {},
   methods: {
-    ...mapActions(["postUnitbyTraining"]),
+    ...mapActions(["postUnitbyTraining", "patchUnit"]),
     handleSave() {
       if (this.$refs.form.validate()) {
-        this.postUnitbyTraining({
-          trainingId: this.training.id,
-          data: this.formData
-        }).then(() => {
-          this.handleClose();
-        });
+        if (this.formData.id) {
+          this.patchUnit(this.formData).then(() => {
+            this.handleClose();
+          });
+        } else {
+          this.postUnitbyTraining({
+            trainingId: this.training.id,
+            data: this.formData
+          }).then(() => {
+            this.handleClose();
+          });
+        }
       }
     },
     handleClose() {
-      this.$refs.form.reset();
+      // this.$refs.form.reset();
       this.dialog = false;
     }
+  },
+  mounted() {
+    this.formData = { ...this.data };
   }
 };
 </script>

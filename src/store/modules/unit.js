@@ -43,6 +43,24 @@ const actions = {
     });
   },
 
+  patchUnit: ({ commit }, data) => {
+    return new Promise(resolve => {
+      http
+        .patch(`Units/${data.id}`, data)
+        .then(({ data }) => {
+          commit("setUnit", data);
+          resolve();
+        })
+        .catch(error => {
+          Toastify({
+            text: `${error.name}: ${error.message}`,
+            duration: 10000,
+            backgroundColor: "linear-gradient(to right, #FF0010, #ff0000)"
+          }).showToast();
+        });
+    });
+  },
+
   getLessonsbyUnit: ({ commit }, id) => {
     http.get(`Units/${id}/lessons`).then(({ data }) => {
       commit("setUnitLessons", data);

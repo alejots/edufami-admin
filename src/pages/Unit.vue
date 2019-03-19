@@ -9,10 +9,10 @@
     <v-layout row wrap>
       <v-flex lg4>
         <UnitCard :unit="unit"/>
-        <UnitForm label="Edit Unit"/>
+        <UnitForm :data="unit" label="Edit Unit"/>
       </v-flex>
       <v-flex lg8>
-        <LessonsTable :training="training" :unit="unit"/>
+        <LessonsTable/>
         <LessonForm :unit="unit" label="Add Lesson"/>
       </v-flex>
     </v-layout>
