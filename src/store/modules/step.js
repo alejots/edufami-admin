@@ -27,7 +27,9 @@ const mutations = {
     state.stepOptions = data;
   },
   addStep: (state, data) => {
-    console.log(state);
+    state.stepOptions.push(data);
+  },
+  addOptionToStep: (state, data) => {
     state.stepOptions.push(data);
   },
   stepReset: state => {

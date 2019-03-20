@@ -8,6 +8,7 @@ import training from "./modules/training";
 import unit from "./modules/unit";
 import lesson from "./modules/lesson";
 import step from "./modules/step";
+import option from "./modules/option";
 
 Vue.use(Vuex);
 
@@ -17,7 +18,8 @@ export default new Vuex.Store({
     training,
     unit,
     lesson,
-    step
+    step,
+    option
   },
   strict: true, //TODO Revisar este tema
   plugins: [createPersistedState({ storage: window.sessionStorage })] // TODO Test storage with cookies see --> https://www.npmjs.com/package/vuex-persistedstate

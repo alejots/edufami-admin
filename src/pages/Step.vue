@@ -7,13 +7,15 @@
       <v-flex lg2 sm2 xs2></v-flex>
     </v-layout>
     <v-layout row wrap>
-      <v-flex lg4>
-        <LessonCard :lesson="lesson"/>
-        <LessonForm label="Edit Lesson"/>
+      <v-flex lg12>
+        <StepCard :step="step"/>
+        <StepForm label="Edit Form"/>
       </v-flex>
-      <v-flex lg8>
-        <StepsTable/>
-        <StepForm label="Add Step"/>
+    </v-layout>
+    <v-layout row wrap>
+      <v-flex lg12>
+        <OptionsTable/>
+        <OptionForm :stepId="step.id" label="Add Option"/>
       </v-flex>
     </v-layout>
   </v-container>
@@ -21,29 +23,29 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import LessonCard from "@/components/cards/LessonCard";
-import LessonForm from "@/components/forms/LessonForm";
-import StepsTable from "@/components/tables/StepsTable";
+import StepCard from "@/components/cards/StepCard";
 import StepForm from "@/components/forms/StepForm";
+import OptionsTable from "@/components/tables/OptionsTable";
+import OptionForm from "@/components/forms/OptionForm";
 
 export default {
   components: {
-    LessonCard,
+    StepCard,
     StepForm,
-    StepsTable,
-    LessonForm
+    OptionsTable,
+    OptionForm
   },
   data: () => ({}),
   computed: {
-    ...mapGetters(["lesson"])
+    ...mapGetters(["step"])
   },
   methods: {
-    ...mapActions(["getLesson", "getStepsbyLesson"])
+    ...mapActions(["getStep", "getOptionsbyStep"])
   },
   beforeMount() {
-    const { lessonId } = this.$route.params;
-    this.getLesson(lessonId);
-    this.getStepsbyLesson(lessonId);
+    const { stepId } = this.$route.params;
+    this.getStep(stepId);
+    this.getOptionsbyStep(stepId);
   }
 };
 </script>
