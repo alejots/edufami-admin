@@ -9,6 +9,7 @@
                 v-if="i.value === 'name'"
                 :to="`/unit/${scope.item.id}`"
               >{{scope.item[i.value]}}</router-link>
+              <Img v-else-if="i.value === 'image'" :src="scope.item[i.value]" height="100px"/>
               <span v-else>{{scope.item[i.value]}}</span>
             </td>
           </template>
@@ -19,8 +20,9 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
+import Img from "@/components/common/Img";
 export default {
-  components: {},
+  components: { Img },
   props: {
     training: Object
   },
@@ -33,8 +35,11 @@ export default {
   beforeMount() {
     this.headers = [
       { text: "Order", value: "order" },
+      { text: "Image", value: "image" },
       { text: "Name", value: "name" },
-      { text: "Description", value: "description" }
+      { text: "Description", value: "description" },
+
+      { text: "Status", value: "status" }
     ];
   },
   computed: {

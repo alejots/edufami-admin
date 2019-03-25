@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://127.0.0.1:3030/api/";
+axios.defaults.baseURL = "http://localhost:3030/api";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.headers.common["Authorization"] =
   localStorage.getItem("user-token") || "";

@@ -57,11 +57,11 @@ export default {
         type: "text",
         label: "Unit Name",
         hint: "The name of the unit that the user can read",
-        counter: 55,
+        counter: 60,
         required: true,
         rules: [
           v => !!v || "Unit name is required",
-          v => (v && v.length <= 55) || "Name must be less than 55 characters"
+          v => (v && v.length <= 60) || "Name must be less than 60 characters"
         ]
       },
       {
@@ -70,15 +70,31 @@ export default {
         label: "Description",
         hint: "A short description that explains the content of the unit",
         counter: 160,
-        required: false
+        required: true,
+        rules: [
+          v => !!v || "The Unit's description is required",
+          v =>
+            (v && v.length <= 160) ||
+            "Description must be less than 160 characters"
+        ]
+      },
+      {
+        model: "image",
+        type: "text",
+        label: "Image",
+        hint: ""
+      },
+      {
+        model: "objective",
+        type: "text",
+        label: "objective",
+        hint: ""
       },
       {
         model: "order",
         type: "text",
         label: "Order",
-        hint: "",
-        counter: 160,
-        required: false
+        hint: ""
       }
     ],
     formData: {}
@@ -90,21 +106,18 @@ export default {
       if (this.$refs.form.validate()) {
         if (this.formData.id) {
           this.patchUnit(this.formData).then(() => {
-            this.handleClose();
+            this.dialog = false;
           });
         } else {
           this.postUnitbyTraining({
             trainingId: this.training.id,
             data: this.formData
           }).then(() => {
-            this.handleClose();
+            this.$refs.form.reset();
+            this.dialog = false;
           });
         }
       }
-    },
-    handleClose() {
-      // this.$refs.form.reset();
-      this.dialog = false;
     }
   },
   mounted() {

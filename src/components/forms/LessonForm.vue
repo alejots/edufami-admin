@@ -51,7 +51,6 @@ export default {
         type: "text",
         label: "Order",
         hint: "",
-        counter: 55,
         required: true,
         rules: [v => !!v || "Order name is required"]
       },
@@ -60,11 +59,11 @@ export default {
         type: "text",
         label: "Lesson Name",
         hint: "The name of the lesson that the user can read",
-        counter: 55,
+        counter: 50,
         required: true,
         rules: [
           v => !!v || "Lesson name is required",
-          v => (v && v.length <= 55) || "Name must be less than 55 characters"
+          v => (v && v.length <= 50) || "Name must be less than 50 characters"
         ]
       },
       {
@@ -72,8 +71,8 @@ export default {
         type: "text",
         label: "Description",
         hint: "A short description that explains the content of the lesson",
-        counter: 160,
-        required: true
+        required: true,
+        rules: [v => !!v || "Description is required"]
       }
     ],
     formData: {}

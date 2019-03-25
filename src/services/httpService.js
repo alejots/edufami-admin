@@ -2,7 +2,7 @@ import axios from "axios";
 import Toastify from "toastify-js";
 import logger from "./logService";
 
-axios.defaults.baseURL = "http://127.0.0.1:3030/api/";
+axios.defaults.baseURL = "http://localhost:3030/api";
 
 axios.interceptors.response.use(null, error => {
   const expectedError =
