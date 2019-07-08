@@ -4,16 +4,13 @@
       <v-flex lg10 sm10 xs10>
         <h4>Training</h4>
       </v-flex>
-      <v-flex lg2 sm2 xs2></v-flex>
     </v-layout>
     <v-layout row wrap>
-      <v-flex lg12>
+      <v-flex lg4>
         <TrainingCard/>
         <TrainingForm :data="training" label="Edit Training"/>
       </v-flex>
-    </v-layout>
-    <v-layout row wrap>
-      <v-flex lg12>
+      <v-flex lg8>
         <UnitsTable/>
         <UnitForm :training="training" label="Add Unit"/>
       </v-flex>

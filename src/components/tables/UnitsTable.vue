@@ -36,8 +36,8 @@ export default {
     this.headers = [
       { text: "Order", value: "order" },
       { text: "Image", value: "image" },
-      { text: "Name", value: "name" },
-      { text: "Description", value: "description" },
+      { text: "Unidad", value: "name" },
+      // { text: "Description", value: "description" },
 
       { text: "Status", value: "status" }
     ];

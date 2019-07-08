@@ -1,8 +1,8 @@
 import NotFound from "@/pages/NotFound.vue";
 import Login from "@/pages/Login.vue";
 // import Dashboard from "@/pages/Dashboard.vue";
-import Trainings from "@/pages/Trainings.vue";
-import Training from "@/pages/Training.vue";
+import Trainings from "@/pages/Trainings/Trainings.vue";
+import Training from "@/pages/Trainings/Training/Training.vue";
 import Unit from "@/pages/Unit.vue";
 import Lesson from "@/pages/Lesson.vue";
 import Step from "@/pages/Step.vue";
